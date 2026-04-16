@@ -127,12 +127,13 @@ if (window.navigator.standalone === false) {
 fileInput.addEventListener('change', e => {
   const file = e.target.files[0];
   if (!file) return;
+  const mimeType = file.type || 'image/jpeg';
   const reader = new FileReader();
-  reader.onload = ev => analyzeCard(ev.target.result.split(',')[1]);
+  reader.onload = ev => analyzeCard(ev.target.result.split(',')[1], mimeType);
   reader.readAsDataURL(file);
 });
 
-async function analyzeCard(base64Data) {
+async function analyzeCard(base64Data, mimeType) {
   setStatus('loading', '辨識中...');
   contactCard.style.display = 'none';
   saveBtn.style.display = 'none';
@@ -142,7 +143,7 @@ async function analyzeCard(base64Data) {
     const resp = await fetch(WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ imageBase64: base64Data })
+      body: JSON.stringify({ imageBase64: base64Data, mimeType: mimeType })
     });
     const text = await resp.text();
     const info = JSON.parse(text.replace(/```json|```/g, '').trim());
