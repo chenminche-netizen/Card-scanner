@@ -12,30 +12,24 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; padding-bottom: 40px; }
-
 .header { background: #fff; padding: 16px 20px 12px; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
 .header h1 { font-size: 20px; font-weight: 600; }
 .header p { font-size: 13px; color: #6e6e73; margin-top: 2px; }
-
 .content { padding: 16px; max-width: 480px; margin: 0 auto; }
-
 .upload-zone { background: #fff; border-radius: 16px; border: 1.5px dashed #c7c7cc; padding: 36px 20px; text-align: center; cursor: pointer; margin-bottom: 16px; }
 .upload-zone:active { background: #f0f0f5; }
 .cam-icon { width: 56px; height: 56px; background: #007aff; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
 .upload-zone .main-text { font-size: 17px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px; }
 .upload-zone .sub-text { font-size: 13px; color: #6e6e73; }
-
 .status-bar { font-size: 14px; color: #6e6e73; text-align: center; padding: 6px 0 10px; min-height: 32px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .spinner { width: 16px; height: 16px; border: 2px solid #e5e5ea; border-top-color: #007aff; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
 .contact-card { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 16px; display: none; }
 .contact-header { background: #007aff; padding: 20px 16px 16px; display: flex; align-items: center; gap: 14px; }
 .avatar { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 600; color: #fff; flex-shrink: 0; }
 .contact-header-info { flex: 1; min-width: 0; }
 .contact-name { font-size: 18px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .contact-sub { font-size: 13px; color: rgba(255,255,255,0.8); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
 .field-list { padding: 0 16px; }
 .field { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 0.5px solid #f2f2f7; }
 .field:last-child { border-bottom: none; }
@@ -44,30 +38,24 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
 .field-label { font-size: 11px; color: #6e6e73; margin-bottom: 1px; }
 .field-input { width: 100%; border: none; outline: none; font-size: 15px; color: #1d1d1f; background: transparent; font-family: inherit; }
 .field-input::placeholder { color: #c7c7cc; }
-
 .save-btn { width: 100%; background: #34c759; color: #fff; border: none; border-radius: 12px; padding: 15px; font-size: 17px; font-weight: 600; cursor: pointer; font-family: inherit; display: none; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
 .save-btn:active { opacity: 0.85; }
 .rescan-btn { width: 100%; background: #f5f5f7; color: #007aff; border: none; border-radius: 12px; padding: 14px; font-size: 16px; font-weight: 500; cursor: pointer; font-family: inherit; display: none; margin-bottom: 10px; }
 .rescan-btn:active { opacity: 0.7; }
 .hint { font-size: 12px; color: #6e6e73; text-align: center; line-height: 1.7; display: none; }
-
 .install-tip { background: #e8f0fe; border-radius: 12px; padding: 11px 14px; margin-bottom: 14px; display: none; }
 .install-tip p { font-size: 13px; color: #1a56c4; line-height: 1.6; }
 </style>
 </head>
 <body>
-
 <div class="header">
   <h1>名片掃描</h1>
   <p>拍照辨識，直接加入聯絡人</p>
 </div>
-
 <div class="content">
-
   <div class="install-tip" id="install-tip">
     <p>點右下角 <strong>分享</strong> → <strong>加入主畫面</strong>，安裝為 App</p>
   </div>
-
   <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
     <div class="cam-icon">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -79,9 +67,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
     <p class="sub-text">或點此從相簿選擇，支援中英文</p>
     <input type="file" id="file-input" accept="image/*" capture="environment" style="display:none">
   </div>
-
   <div class="status-bar" id="status-bar"></div>
-
   <div class="contact-card" id="contact-card">
     <div class="contact-header">
       <div class="avatar" id="avatar">?</div>
@@ -93,61 +79,39 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
     <div class="field-list">
       <div class="field">
         <div class="field-dot" style="background:#007aff"></div>
-        <div class="field-inner">
-          <div class="field-label">電話</div>
-          <input class="field-input" id="f-tel" type="tel" placeholder="未辨識到">
-        </div>
+        <div class="field-inner"><div class="field-label">電話</div><input class="field-input" id="f-tel" type="tel" placeholder="未辨識到"></div>
       </div>
       <div class="field">
         <div class="field-dot" style="background:#5856d6"></div>
-        <div class="field-inner">
-          <div class="field-label">Email</div>
-          <input class="field-input" id="f-email" type="email" placeholder="未辨識到">
-        </div>
+        <div class="field-inner"><div class="field-label">Email</div><input class="field-input" id="f-email" type="email" placeholder="未辨識到"></div>
       </div>
       <div class="field">
         <div class="field-dot" style="background:#ff9500"></div>
-        <div class="field-inner">
-          <div class="field-label">公司</div>
-          <input class="field-input" id="f-org" type="text" placeholder="未辨識到">
-        </div>
+        <div class="field-inner"><div class="field-label">公司</div><input class="field-input" id="f-org" type="text" placeholder="未辨識到"></div>
       </div>
       <div class="field">
         <div class="field-dot" style="background:#ff9500"></div>
-        <div class="field-inner">
-          <div class="field-label">職稱</div>
-          <input class="field-input" id="f-title" type="text" placeholder="未辨識到">
-        </div>
+        <div class="field-inner"><div class="field-label">職稱</div><input class="field-input" id="f-title" type="text" placeholder="未辨識到"></div>
       </div>
       <div class="field">
         <div class="field-dot" style="background:#34c759"></div>
-        <div class="field-inner">
-          <div class="field-label">地址</div>
-          <input class="field-input" id="f-addr" type="text" placeholder="未辨識到">
-        </div>
+        <div class="field-inner"><div class="field-label">地址</div><input class="field-input" id="f-addr" type="text" placeholder="未辨識到"></div>
       </div>
       <div class="field">
         <div class="field-dot" style="background:#30b0c7"></div>
-        <div class="field-inner">
-          <div class="field-label">網站</div>
-          <input class="field-input" id="f-url" type="url" placeholder="未辨識到">
-        </div>
+        <div class="field-inner"><div class="field-label">網站</div><input class="field-input" id="f-url" type="url" placeholder="未辨識到"></div>
       </div>
     </div>
   </div>
-
   <button class="save-btn" id="save-btn" onclick="saveContact()">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     加入聯絡人
   </button>
-
   <button class="rescan-btn" id="rescan-btn" onclick="resetAll()">重新掃描</button>
-
   <p class="hint" id="hint">跳出「新增聯絡人」後，點右上角<strong>完成</strong>即儲存</p>
-
 </div>
-
 <script>
+const WORKER_URL = 'https://card-api.chenminche.workers.dev';
 const fileInput = document.getElementById('file-input');
 const statusBar = document.getElementById('status-bar');
 const contactCard = document.getElementById('contact-card');
@@ -175,20 +139,12 @@ async function analyzeCard(base64Data) {
   rescanBtn.style.display = 'none';
   hint.style.display = 'none';
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    const resp = await fetch(WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: [
-          { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: base64Data } },
-          { type: 'text', text: '請辨識這張名片上的所有資訊，以純 JSON 回覆，不要任何其他文字或 markdown。格式：{"name":"","org":"","title":"","tel":"","email":"","addr":"","url":""}。如果某欄位不存在就留空字串。tel 只取第一個電話號碼。' }
-        ]}]
-      })
+      body: JSON.stringify({ imageBase64: base64Data })
     });
-    const data = await resp.json();
-    const text = data.content.map(i => i.text || '').join('');
+    const text = await resp.text();
     const info = JSON.parse(text.replace(/```json|```/g, '').trim());
 
     currentName = info.name || '';
